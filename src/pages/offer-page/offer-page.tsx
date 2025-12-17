@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import Header from '../../components/header/header.tsx';
 
-export default function OfferPage(): JSX.Element {
+export default function OfferPage(auth): JSX.Element {
   return (
     <div className="page">
       <Header />
