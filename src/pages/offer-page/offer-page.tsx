@@ -1,8 +1,24 @@
 
 import { Link } from 'react-router-dom';
 import Header from '../../components/header/header.tsx';
+import Footer from '../../components/footer/footer.tsx';
+import { Offer } from '../../types/offer.ts';
+import { offers } from '../../mocks/offers.ts';
+import { useParams } from 'react-router-dom';
+import ErrorPage from '../error-page/error-page.tsx';
+//import { AuthorizationStatus } from '../../const.ts';
+
+//type OfferPageProps = {
+//  authorizationStatus: AuthorizationStatus;
 
 export default function OfferPage(): JSX.Element {
+  const { id } = useParams();
+  const currentOffer: Offer | undefined = offers.find((offer) => offer.id === Number(id));
+
+  if (!currentOffer) {
+    return <ErrorPage />;
+  }
+
   return (
     <div className="page">
       <Header />
@@ -33,14 +49,14 @@ export default function OfferPage(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              (currentOffer.isPremium && (<div className="offer__mark"><span>Premium</span></div>))
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   Beautiful &amp; luxurious studio at great location
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button className={`offer__bookmark-button ${currentOffer.isFavorite && 'offer__bookmark-button--active'} button`}
+                  type="button"
+                >
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -56,13 +72,13 @@ export default function OfferPage(): JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {currentOffer.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {currentOffer.bedrooms} Bedroom(s)
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  {currentOffer.maxAdults} Adult(s)
                 </li>
               </ul>
               <div className="offer__price">
@@ -108,13 +124,13 @@ export default function OfferPage(): JSX.Element {
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"></img>
+                    <img className="offer__avatar user__avatar" src={currentOffer.host.avatarUrl} width="74" height="74" alt="Host avatar"></img>
                   </div>
                   <span className="offer__user-name">
-                    Angelina
+                    {currentOffer.host.name}
                   </span>
                   <span className="offer__user-status">
-                    Pro
+                    {currentOffer.host.isPro ? 'Pro' : ''}
                   </span>
                 </div>
                 <div className="offer__description">
@@ -309,6 +325,7 @@ export default function OfferPage(): JSX.Element {
           </section>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

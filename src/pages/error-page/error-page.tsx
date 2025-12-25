@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-function ErrorPage() {
+export default function ErrorPage() {
   const [countdown, setCountdown] = useState(5);
   const navigate = useNavigate();
 
@@ -183,5 +183,3 @@ function ErrorPage() {
     </>
   );
 }
-
-export default ErrorPage;

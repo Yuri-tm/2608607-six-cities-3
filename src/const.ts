@@ -1,5 +1,7 @@
 export const Setting = {
-  locationCount: 6
+  locationCount: 4,
+  DefaultCity: 'Amsterdam',
+  DefaultSortType: 'Popular'
 };
 
 export enum AppRoute {

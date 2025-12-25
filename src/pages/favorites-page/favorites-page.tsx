@@ -1,6 +1,12 @@
+import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import { Offer } from '../../types/offer';
 
-export default function FavoritesPage(): JSX.Element {
+type FavoritesPageProps = {
+  offersList: Offer[];
+}
+
+export default function FavoritesPage(props: FavoritesPageProps): JSX.Element {
   return (
     <div className="page">
       <Header />
@@ -21,7 +27,7 @@ export default function FavoritesPage(): JSX.Element {
                 <div className="favorites__places">
                   <article className="favorites__card place-card">
                     <div className="place-card__mark">
-                      <span>Premium</span>
+                      <span>{Premium}</span>
                     </div>
                     <div className="favorites__image-wrapper place-card__image-wrapper">
                       <a href="#">
@@ -134,11 +140,7 @@ export default function FavoritesPage(): JSX.Element {
           </section>
         </div>
       </main>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"> </img>
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }
