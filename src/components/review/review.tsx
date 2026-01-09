@@ -7,9 +7,11 @@ type ReviewsProps = {
 }
 
 const Reviews: FC<ReviewsProps> = ({ isAuth }) => {
-  <>
-    <ReviewsList />
-    {isAuth && <ReviewsForm />}
-  </>;
+  return (
+    <>
+      <ReviewsList />
+      {isAuth && <ReviewsForm />}
+    </>
+  );
 };
 export default Reviews;

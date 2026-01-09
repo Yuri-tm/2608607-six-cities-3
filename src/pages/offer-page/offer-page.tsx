@@ -49,7 +49,7 @@ export default function OfferPage(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              (currentOffer.isPremium && (<div className="offer__mark"><span>Premium</span></div>))
+              <div className="offer__mark"><span>Premium</span></div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   Beautiful &amp; luxurious studio at great location
