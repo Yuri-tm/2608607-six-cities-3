@@ -1,5 +1,4 @@
 import Reviews from '../../components/review/review';
-import { AuthorizationStatus } from '../../const';
 
 export default function OfferPage(): JSX.Element {
   return (
@@ -153,7 +152,7 @@ export default function OfferPage(): JSX.Element {
                 </div>
               </div>
 
-              <Reviews isAuth={authorizationStatus === AuthorizationStatus.Auth} />
+              <Reviews isAuth={true} />
 
             </div>
           </div>

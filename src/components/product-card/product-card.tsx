@@ -26,9 +26,7 @@ export default function ProductCard({offer, handleCardHover, activeCard}: Produc
         <span>Premium</span>
       </div>}
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href="#">
-            <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Place image"></img>
-          </a>
+          <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Place image"></img>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
@@ -50,7 +48,7 @@ export default function ProductCard({offer, handleCardHover, activeCard}: Produc
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#">{offer.title}</a>
+            {offer.title}
           </h2>
           <p className="place-card__type">{offer.type}</p>
         </div>

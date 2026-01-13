@@ -1,6 +1,11 @@
 import ReviewsForm from '../reviews-form/reviews-form';
+import { FC } from 'react';
 
-export default function ReviewsList() {
+type ReviewsListProps = {
+  isAuth: boolean;
+}
+
+const ReviewsList: FC<ReviewsListProps> = function({ isAuth }) {
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
@@ -28,9 +33,9 @@ export default function ReviewsList() {
           </div>
         </li>
       </ul>
-
-      <ReviewsForm />
-
+      {isAuth && <ReviewsForm />}
     </section>
   );
-}
+};
+
+export default ReviewsList;
