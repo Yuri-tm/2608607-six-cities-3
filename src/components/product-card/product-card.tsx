@@ -1,42 +1,58 @@
+import { Offer } from '../../types/offer';
+import { Link } from 'react-router-dom';
+
 type ProductCardProps = {
-   rating: number; // Rating from 0 to 5
-}
+  offer: Offer;
+  handleCardHover?: (offer?: Offer) => void;
+  activeCard?: Offer | null;
+  }
 
-export default function ProductCard({ rating, }: ProductCardProps): JSX.Element {
+export default function ProductCard({offer, handleCardHover, activeCard}: ProductCardProps): JSX.Element {
 
-  const ratingWidth = `${(rating / 5) * 100}%`;
+  const ratingWidth = `${(offer.rating / 5) * 100}%`;
+
+  const onMouseEnter = () => {
+    handleCardHover?.(offer);
+  };
+  const onMouseLeave = () => {
+    handleCardHover?.();
+  };
 
   return (
-    <article className="cities__card place-card">
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"></img>
-        </a>
-      </div>
-      <div className="place-card__info">
-        <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">&euro;132</b>
-            <span className="place-card__price-text">&#47;&nbsp;night</span>
-          </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+    <Link to={`/offer/${offer.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <article className="cities__card place-card" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        {offer.isPremium &&
+      <div className="place-card__mark">
+        <span>Premium</span>
+      </div>}
+        <div className="cities__image-wrapper place-card__image-wrapper">
+          <img className="place-card__image" src={offer.images[0]} width="260" height="200" alt="Place image"></img>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: ratingWidth}}></span>
-            <span className="visually-hidden">Rating</span>
+        <div className="place-card__info">
+          <div className="place-card__price-wrapper">
+            <div className="place-card__price">
+              <b className="place-card__price-value">&euro;{offer.price}</b>
+              <span className="place-card__price-text">&#47;&nbsp;night</span>
+            </div>
+            <button className="place-card__bookmark-button button" type="button">
+              <svg className="place-card__bookmark-icon" width="18" height="19">
+                <use xlinkHref="#icon-bookmark"></use>
+              </svg>
+              <span className="visually-hidden">To bookmarks</span>
+            </button>
           </div>
+          <div className="place-card__rating rating">
+            <div className="place-card__stars rating__stars">
+              <span style={{width: ratingWidth}}></span>
+              <span className="visually-hidden">Rating</span>
+            </div>
+          </div>
+          <h2 className="place-card__name">
+            {offer.title}
+          </h2>
+          <p className="place-card__type">{offer.type}</p>
         </div>
-        <h2 className="place-card__name">
-          <a href="#">Canal View Prinsengracht</a>
-        </h2>
-        <p className="place-card__type">Apartment</p>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 }

@@ -1,18 +1,38 @@
 import ProductCard from '../product-card/product-card';
+import { Offer } from '../../types/offer';
+import { offers } from '../../mocks/offers';
+import { useState } from 'react';
+import ProductSortingForm from '../product-sorting-form/productSortingForm';
 
 type ProductCardListProps = {
-  locationCount: number;
+  offersList?: Offer[];
 }
 
-export default function ProductCardList({ locationCount }: ProductCardListProps): JSX.Element {
-  const productCardList: JSX.Element[] = Array.from(
-    { length: locationCount },
-    (_, i) => <ProductCard key={i} rating={0} /> //the mapping callback returns a ProductCard for each index. Each ProductCard receives a numeric key based on the array index.
-  );
+export default function ProductCardList({ offersList = offers }: ProductCardListProps): JSX.Element {
+
+  const [activeCard, setActiveCard] = useState<Offer | null>(null);
+
+  const handleCardHover = (offer?: Offer) => {
+    setActiveCard(offer || null);
+  };
+
+  const productCardList: JSX.Element[] = (offersList || offers).map((offer) => (
+    <ProductCard key={offer.id} offer={offer} handleCardHover={handleCardHover} activeCard={activeCard} />
+  ));
 
   return (
-    <div className="cities__places-list places__list tabs__content">
-      {productCardList}
+    <div className="cities__places-container container">
+      <section className="cities__places places">
+        <h2 className="visually-hidden">Places</h2>
+        <b className="places__found">312 places to stay in Amsterdam</b>
+        <ProductSortingForm />
+        <div className="cities__places-list places__list tabs__content">
+          {productCardList}
+        </div>
+      </section>
+      <div className="cities__right-section">
+        <section className="cities__map map"></section>
+      </div>
     </div>
   );
 }
