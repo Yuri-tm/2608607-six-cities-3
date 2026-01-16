@@ -95,7 +95,7 @@ export default function MainPage({locationCount}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <ProductCardList locationCount={locationCount} /> {/*Renders a list of ProductCard components based on locationCount prop*/}
+                <ProductCardList /> {/*Renders a list of ProductCard components based on locationCount prop*/}
               </div>
             </section>
             <div className="cities__right-section">

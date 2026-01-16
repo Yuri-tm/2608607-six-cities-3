@@ -1,7 +1,6 @@
 import ProductCard from '../product-card/product-card';
 import { Offer } from '../../types/offer';
 import { offers } from '../../mocks/offers';
-import { useState } from 'react';
 import ProductSortingForm from '../product-sorting-form/productSortingForm';
 
 type ProductCardListProps = {
@@ -10,14 +9,12 @@ type ProductCardListProps = {
 
 export default function ProductCardList({ offersList = offers }: ProductCardListProps): JSX.Element {
 
-  const [activeCard, setActiveCard] = useState<Offer | null>(null);
-
-  const handleCardHover = (offer?: Offer) => {
-    setActiveCard(offer || null);
+  const handleCardHover = (_offer?: Offer) => {
+    // Handle card hover if needed
   };
 
   const productCardList: JSX.Element[] = (offersList || offers).map((offer) => (
-    <ProductCard key={offer.id} offer={offer} handleCardHover={handleCardHover} activeCard={activeCard} />
+    <ProductCard key={offer.id} offer={offer} handleCardHover={handleCardHover} />
   ));
 
   return (

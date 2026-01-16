@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom';
 type ProductCardProps = {
   offer: Offer;
   handleCardHover?: (offer?: Offer) => void;
-  activeCard?: Offer | null;
   }
 
-export default function ProductCard({offer, handleCardHover, activeCard}: ProductCardProps): JSX.Element {
+export default function ProductCard({offer, handleCardHover}: ProductCardProps): JSX.Element {
 
   const ratingWidth = `${(offer.rating / 5) * 100}%`;
 

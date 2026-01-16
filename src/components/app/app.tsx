@@ -22,7 +22,7 @@ export default function App({ offers }: AppScreenProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offers={offers} />}
+          element={<MainPage offers={offers} city="Amsterdam" />}
         />
         <Route
           path={AppRoute.Favorites}

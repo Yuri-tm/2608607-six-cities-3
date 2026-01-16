@@ -16,8 +16,6 @@ export default function MainPage({ offers }: MainPageProps): JSX.Element {
   const cityData = firstOffer?.city || { name: 'Amsterdam', location: { latitude: 52.3909553943508, longitude: 4.85309666406198, zoom: 10 } };
   const currentCity = { city: cityData.name, location: cityData.location };
   const currentOffer = null;
-  const center: [number, number] = [currentCity.location.latitude, currentCity.location.longitude];
-  const zoom = currentCity.location.zoom;
 
   if (!firstOffer) {
     return (
@@ -39,7 +37,7 @@ export default function MainPage({ offers }: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <Tabs />
         <ProductCardList offersList={offers} />
-        <Map offers={offers} currentCity={currentCity} currentOffer={currentOffer} mapClassName="cities__map" center={center} zoom={zoom} />
+        <Map offers={offers} currentCity={currentCity} currentOffer={currentOffer} mapClassName="cities__map" />
       </main>
     </div>
   );

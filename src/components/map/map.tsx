@@ -9,11 +9,9 @@ interface MapProps {
   currentCity: { city: string; location: { latitude: number; longitude: number; zoom: number } };
   currentOffer: number | null;
   mapClassName: string;
-  center: [number, number];
-  zoom: number;
 }
 
-const Map: React.FC<MapProps> = ({ offers, currentCity, currentOffer, mapClassName, center, zoom }) => {
+const Map: React.FC<MapProps> = ({ offers, currentCity, currentOffer, mapClassName }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletMap = useMap({ mapContainerRef: mapRef, location: currentCity.location });
   const markersRef = useRef<leaflet.Marker[]>([]);
