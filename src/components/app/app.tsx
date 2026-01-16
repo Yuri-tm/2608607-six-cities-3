@@ -4,10 +4,10 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import ErrorPage from '../../pages/error-page/error-page';
 import { Offer } from '../../types/offer';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../../pages/private-route/private-route';
+
 
 type AppScreenProps = {
   offers: Offer[];
