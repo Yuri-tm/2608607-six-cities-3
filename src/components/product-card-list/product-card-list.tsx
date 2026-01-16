@@ -13,7 +13,7 @@ type ProductCardListProps = {
 
 export default function ProductCardList({ offersList = offers, offers: offersData, currentCity, currentOffer }: ProductCardListProps): JSX.Element {
 
-  const handleCardHover = (_offer?: Offer) => {
+  const handleCardHover = () => {
     // Handle card hover if needed
   };
 
@@ -33,7 +33,7 @@ export default function ProductCardList({ offersList = offers, offers: offersDat
       </section>
       <div className="cities__right-section">
         <section className="cities__map map">
-          {offersData && currentCity && <Map offers={offersData} currentCity={currentCity} currentOffer={currentOffer || null} />}
+          {offersData && currentCity && <Map offers={offersData} currentCity={currentCity} currentOffer={currentOffer?.id || null} />}
         </section>
       </div>
     </div>
