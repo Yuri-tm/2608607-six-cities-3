@@ -13,7 +13,7 @@ function useMap({mapContainerRef, location}: useMapProps): leaflet.Map | null {
 
   useEffect(() => {
     if (mapContainerRef.current !== null && !isRenderedRef.current) {
-      const instance = leaflet.map(mapContainerRef.current as HTMLElement, {
+      const instance = leaflet.map(mapContainerRef.current , {
         center: [location.latitude, location.longitude],
         zoom: location.zoom,
       });

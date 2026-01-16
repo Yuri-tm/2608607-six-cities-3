@@ -152,7 +152,7 @@ export default function OfferPage(): JSX.Element {
                 </div>
               </div>
 
-              <Reviews isAuth={true} />
+              <Reviews isAuth />
 
             </div>
           </div>
