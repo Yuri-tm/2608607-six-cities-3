@@ -1,13 +1,17 @@
 import ProductCard from '../product-card/product-card';
+import Map from '../map/map';
 import { Offer } from '../../types/offer';
 import { offers } from '../../mocks/offers';
 import ProductSortingForm from '../product-sorting-form/productSortingForm';
 
 type ProductCardListProps = {
   offersList?: Offer[];
+  offers?: Offer[];
+  currentCity?: { city: string; location: { latitude: number; longitude: number; zoom: number } };
+  currentOffer?: Offer | null;
 }
 
-export default function ProductCardList({ offersList = offers }: ProductCardListProps): JSX.Element {
+export default function ProductCardList({ offersList = offers, offers: offersData, currentCity, currentOffer }: ProductCardListProps): JSX.Element {
 
   const handleCardHover = (_offer?: Offer) => {
     // Handle card hover if needed
@@ -28,7 +32,9 @@ export default function ProductCardList({ offersList = offers }: ProductCardList
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <section className="cities__map map">
+          {offersData && currentCity && <Map offers={offersData} currentCity={currentCity} currentOffer={currentOffer || null} />}
+        </section>
       </div>
     </div>
   );

@@ -1,10 +1,19 @@
 import ProductCardList from '../../components/product-card-list/product-card-list';
+import Map from '../../components/map/map';
+import { Offer } from '../../types/offer';
+import { offers } from '../../mocks/offers';
 
 type MainPageProps = {
   locationCount: number;
+  offers?: Offer[];
 }
 
-export default function MainPage({locationCount}: MainPageProps): JSX.Element {
+export default function MainPage({locationCount, offers: propsOffers}: MainPageProps): JSX.Element {
+  const offersList = propsOffers || offers;
+  const firstOffer = offersList[0];
+  const cityData = firstOffer?.city as { name: string; location: { latitude: number; longitude: number; zoom: number } };
+  const currentCity = { city: cityData.name, location: cityData.location };
+  const currentOffer = null;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -95,11 +104,11 @@ export default function MainPage({locationCount}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <ProductCardList /> {/*Renders a list of ProductCard components based on locationCount prop*/}
+                <ProductCardList />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map offers={offersList} currentCity={currentCity} currentOffer={currentOffer} />
             </div>
           </div>
         </div>

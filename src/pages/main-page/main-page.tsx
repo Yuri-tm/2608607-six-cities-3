@@ -2,13 +2,12 @@
 import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import ProductCardList from '../../components/product-card-list/product-card-list';
-import Map from '../../components/map/map';
 import { Offer } from '../../types/offer';
 
 type MainPageProps = {
   offers: Offer[];
   city: string;
-//  sortType: string;
+  //  sortType: string;
 }
 
 export default function MainPage({ offers }: MainPageProps): JSX.Element {
@@ -36,8 +35,7 @@ export default function MainPage({ offers }: MainPageProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <Tabs />
-        <ProductCardList offersList={offers} />
-        <Map offers={offers} currentCity={currentCity} currentOffer={currentOffer} mapClassName="cities__map" />
+        <ProductCardList offersList={offers} offers={offers} currentCity={currentCity} currentOffer={currentOffer} />
       </main>
     </div>
   );

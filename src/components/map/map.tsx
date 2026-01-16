@@ -8,11 +8,10 @@ interface MapProps {
   offers: Offer[];
   currentCity: { city: string; location: { latitude: number; longitude: number; zoom: number } };
   currentOffer: number | null;
-  mapClassName: string;
-}
+ }
 
-const Map: React.FC<MapProps> = ({ offers, currentCity, currentOffer, mapClassName }) => {
-  const mapRef = useRef<HTMLDivElement>(null);
+const Map: React.FC<MapProps> = ({ offers, currentCity, currentOffer }) => {
+  const mapRef = useRef<HTMLElement>(null);
   const leafletMap = useMap({ mapContainerRef: mapRef, location: currentCity.location });
   const markersRef = useRef<leaflet.Marker[]>([]);
 
@@ -61,7 +60,7 @@ const Map: React.FC<MapProps> = ({ offers, currentCity, currentOffer, mapClassNa
     };
   }, [leafletMap, offers, currentOffer, defaultCustomIcon, activeCustomIcon]);
 
-  return <div className={mapClassName} ref={mapRef} style={{ height: '100%', width: '100%' }} />;
+  return <section className="cities__map map" ref={mapRef} style={{ height: '100%', width: '100%' }} />;
 };
 
 export default Map;
