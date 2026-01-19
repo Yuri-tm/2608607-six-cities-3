@@ -1,23 +1,24 @@
 import ProductCard from '../product-card/product-card';
+import Map from '../map/map';
 import { Offer } from '../../types/offer';
 import { offers } from '../../mocks/offers';
-import { useState } from 'react';
 import ProductSortingForm from '../product-sorting-form/productSortingForm';
 
 type ProductCardListProps = {
   offersList?: Offer[];
+  offers?: Offer[];
+  currentCity?: { city: string; location: { latitude: number; longitude: number; zoom: number } };
+  currentOffer?: Offer | null;
 }
 
-export default function ProductCardList({ offersList = offers }: ProductCardListProps): JSX.Element {
+export default function ProductCardList({ offersList = offers, offers: offersData, currentCity, currentOffer }: ProductCardListProps): JSX.Element {
 
-  const [activeCard, setActiveCard] = useState<Offer | null>(null);
-
-  const handleCardHover = (offer?: Offer) => {
-    setActiveCard(offer || null);
+  const handleCardHover = () => {
+    // Handle card hover if needed
   };
 
   const productCardList: JSX.Element[] = (offersList || offers).map((offer) => (
-    <ProductCard key={offer.id} offer={offer} handleCardHover={handleCardHover} activeCard={activeCard} />
+    <ProductCard key={offer.id} offer={offer} handleCardHover={handleCardHover} />
   ));
 
   return (
@@ -31,7 +32,9 @@ export default function ProductCardList({ offersList = offers }: ProductCardList
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <section className="cities__map map">
+          {offersData && currentCity && <Map offers={offersData} currentCity={currentCity} currentOffer={currentOffer?.id || null} />}
+        </section>
       </div>
     </div>
   );
