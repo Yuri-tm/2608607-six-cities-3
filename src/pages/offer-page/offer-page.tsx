@@ -3,7 +3,7 @@ import { Offer } from '../../types/offer.ts';
 import { offers } from '../../mocks/offers.ts';
 import { useParams } from 'react-router-dom';
 import ErrorPage from '../error-page/error-page.tsx';
-import OfferComponent from '../offer/offer.tsx';
+import OfferComponent from '../../components/offer/offer.tsx';
 //import { AuthorizationStatus } from '../../const.ts';
 
 //type OfferPageProps = {

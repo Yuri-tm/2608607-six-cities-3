@@ -3,15 +3,15 @@ import 'leaflet/dist/leaflet.css';
 import React, { useEffect, useRef } from 'react';
 
 interface useMapProps {
-  mapContainerRef: React.RefObject<HTMLElement>;
+  mapContainerRef: React.RefObject<HTMLElement | null>;
   location: {latitude: number; longitude: number; zoom: number};
 }
 
-function useMap({mapContainerRef, location}: useMapProps): leaflet.Map | null {
+export const useMap = ({mapContainerRef, location}: useMapProps): leaflet.Map | null => {
   const [leafletMap, setLeafletMap] = React.useState<leaflet.Map | null>(null);
   const isRenderedRef = useRef(false);
 
-  useEffect(() => {
+  useEffect((): void => {
     if (mapContainerRef.current !== null && !isRenderedRef.current) {
       const instance = leaflet.map(mapContainerRef.current , {
         center: [location.latitude, location.longitude],
@@ -26,6 +26,6 @@ function useMap({mapContainerRef, location}: useMapProps): leaflet.Map | null {
   }, [mapContainerRef, location]);
 
   return leafletMap;
-}
+};
 
-export default useMap;
+

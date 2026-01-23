@@ -1,39 +1,36 @@
 import ProductCard from '../product-card/product-card';
 import Map from '../map/map';
 import { Offer } from '../../types/offer';
-import { offers } from '../../mocks/offers';
 import ProductSortingForm from '../product-sorting-form/productSortingForm';
+import { useState } from 'react';
 
 type ProductCardListProps = {
-  offersList?: Offer[];
-  offers?: Offer[];
   currentCity?: { city: string; location: { latitude: number; longitude: number; zoom: number } };
-  currentOffer?: Offer | null;
+  currentOffers?: Offer[];
 }
 
-export default function ProductCardList({ offersList = offers, offers: offersData, currentCity, currentOffer }: ProductCardListProps): JSX.Element {
+export default function ProductCardList({ currentCity, currentOffers }: ProductCardListProps): JSX.Element {
+  const [hoveredOfferId, setHoveredOfferId] = useState<number | undefined>(undefined);
 
-  const handleCardHover = () => {
-    // Handle card hover if needed
+  const handleCardHover = (offerId?: number): void => {
+    setHoveredOfferId(offerId);
   };
-
-  const productCardList: JSX.Element[] = (offersList || offers).map((offer) => (
-    <ProductCard key={offer.id} offer={offer} handleCardHover={handleCardHover} />
-  ));
 
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">312 places to stay in Amsterdam</b>
+        <b className="places__found">{currentOffers?.length || 0} places to stay in {currentCity?.city}</b>
         <ProductSortingForm />
         <div className="cities__places-list places__list tabs__content">
-          {productCardList}
+          {currentOffers?.map((offer) => (
+            <ProductCard key={offer.id} offer={offer} block="cities" onCardHover={handleCardHover} />
+          ))}
         </div>
       </section>
       <div className="cities__right-section">
         <section className="cities__map map">
-          {offersData && currentCity && <Map offers={offersData} currentCity={currentCity} currentOffer={currentOffer?.id || null} />}
+          {currentCity && <Map currentCity={currentCity} currentOffer={hoveredOfferId || null} offers={currentOffers || []} />}
         </section>
       </div>
     </div>

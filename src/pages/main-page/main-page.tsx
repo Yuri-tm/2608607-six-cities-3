@@ -1,4 +1,3 @@
-//import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import ProductCardList from '../../components/product-card-list/product-card-list';
@@ -7,14 +6,12 @@ import { Offer } from '../../types/offer';
 type MainPageProps = {
   offers: Offer[];
   city: string;
-  //  sortType: string;
 }
 
 export default function MainPage({ offers }: MainPageProps): JSX.Element {
   const firstOffer = offers[0];
   const cityData = firstOffer?.city || { name: 'Amsterdam', location: { latitude: 52.3909553943508, longitude: 4.85309666406198, zoom: 10 } };
   const currentCity = { city: cityData.name, location: cityData.location };
-  const currentOffer = null;
 
   if (!firstOffer) {
     return (
@@ -23,7 +20,7 @@ export default function MainPage({ offers }: MainPageProps): JSX.Element {
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
           <Tabs />
-          <ProductCardList offersList={offers} />
+          <ProductCardList currentCity={currentCity} currentOffers={[]} />
         </main>
       </div>
     );
@@ -35,7 +32,7 @@ export default function MainPage({ offers }: MainPageProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <Tabs />
-        <ProductCardList offersList={offers} offers={offers} currentCity={currentCity} currentOffer={currentOffer} />
+        <ProductCardList currentCity={currentCity} currentOffers={offers} />
       </main>
     </div>
   );

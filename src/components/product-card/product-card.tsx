@@ -3,23 +3,17 @@ import { Link } from 'react-router-dom';
 
 type ProductCardProps = {
   offer: Offer;
-  handleCardHover?: (offer?: Offer) => void;
+  onCardHover?: (offerId?: Offer['id']) => void;
+  block?: string;
   }
 
-export default function ProductCard({offer, handleCardHover}: ProductCardProps): JSX.Element {
-
+export default function ProductCard({offer, onCardHover, block}: ProductCardProps): JSX.Element {
   const ratingWidth = `${(offer.rating / 5) * 100}%`;
 
-  const onMouseEnter = () => {
-    handleCardHover?.(offer);
-  };
-  const onMouseLeave = () => {
-    handleCardHover?.();
-  };
 
   return (
     <Link to={`/offer/${offer.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-      <article className="cities__card place-card" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <article className={`${block || 'cities'}__card place-card`} onMouseEnter={() => onCardHover?.(offer.id)} onMouseLeave={() => onCardHover?.(undefined)}>
         {offer.isPremium &&
       <div className="place-card__mark">
         <span>Premium</span>
