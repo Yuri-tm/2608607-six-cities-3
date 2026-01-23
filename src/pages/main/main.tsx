@@ -4,11 +4,10 @@ import { Offer } from '../../types/offer';
 import { offers } from '../../mocks/offers';
 
 type MainPageProps = {
-  locationCount: number;
   offers?: Offer[];
 }
 
-export default function MainPage({locationCount, offers: propsOffers}: MainPageProps): JSX.Element {
+export default function MainPage({ offers: propsOffers}: MainPageProps): JSX.Element {
   const offersList = propsOffers || offers;
   const firstOffer = offersList[0];
   const cityData = firstOffer?.city as { name: string; location: { latitude: number; longitude: number; zoom: number } };

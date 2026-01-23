@@ -32,7 +32,7 @@ const Map: React.FC<MapProps> = ({ offers, currentCity, currentOffer }) => {
   useEffect(() => {
     if (leafletMap) {
       // Удаляем маркеры для предложений, которых больше нет в списке
-      const currentOfferIds = new Set(offers.map(offer => offer.id));
+      const currentOfferIds = new Set(offers.map((offer) => offer.id));
       Object.keys(markersRef.current).forEach((offerIdStr) => {
         const offerId = Number(offerIdStr);
         if (!currentOfferIds.has(offerId)) {
@@ -44,7 +44,7 @@ const Map: React.FC<MapProps> = ({ offers, currentCity, currentOffer }) => {
       // Добавляем или обновляем маркеры для каждого предложения
       offers.forEach((offer) => {
         const existingMarker = markersRef.current[offer.id];
-        
+
         if (existingMarker) {
           // Всегда обновляем позицию маркера из offer.location
           existingMarker.setLatLng([offer.location.latitude, offer.location.longitude]);
@@ -54,7 +54,7 @@ const Map: React.FC<MapProps> = ({ offers, currentCity, currentOffer }) => {
             [offer.location.latitude, offer.location.longitude],
             { icon: defaultCustomIcon }
           ).addTo(leafletMap);
-          
+
           markersRef.current[offer.id] = marker;
         }
       });
